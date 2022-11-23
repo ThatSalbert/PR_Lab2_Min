@@ -1,0 +1,28 @@
+version: "3.8"
+
+services:
+  producer:
+    build: ./producer
+    container_name: "producer"
+    ports:
+      - "8000:8000"
+    expose:
+      - "8000"
+    depends_on:
+      - aggregator
+  aggregator:
+    build: ./aggregator
+    container_name: "aggregator"
+    ports:
+      - "8001:8001"
+    expose:
+      - "8001"
+    depends_on:
+      - consumer
+  consumer:
+    build: ./consumer
+    container_name: "consumer"
+    ports:
+      - "8002:8002"
+    expose:
+      - "8002"
